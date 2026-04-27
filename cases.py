@@ -49,8 +49,42 @@ MANDATORY_CASES = [
     "request_type": "Presentacion",
     "expected_spaces": {"AulaA", "SalaReuniones"},
     },
+    {
+    "case_name": "Caso 7 - ReunionAccesible en h2 (enfoque accesibilidad)",
+    "request_id": "reqG",
+    "slot": "h2",
+    "request_type": "ReunionAccesible",
+    "expected_spaces": {"AulaA", "SalaReuniones"},
+    },
+    {
+    "case_name": "Caso 8 - Presentacion con preferencia centrica",
+    "request_id": "reqH",
+    "slot": "h2",
+    "request_type": "Presentacion",
+    "expected_spaces": {"AulaA", "SalaReuniones"},
+    },
+    {
+    "case_name": "Caso 9 - EstudioIndividual evitando colaborativos",
+    "request_id": "reqI",
+    "slot": "h1",
+    "request_type": "EstudioIndividual",
+    "expected_spaces": {"Biblio1"},
+    },
+    {
+    "case_name": "Caso 10 - PresentacionGrande optimizada",
+    "request_id": "reqJ",
+    "slot": "h3",
+    "request_type": "PresentacionGrande",
+    "expected_spaces": {"AuditorioMini"},
+    },
+    {
+    "case_name": "Caso 11 - ReunionAccesible en h1 (menos opciones)",
+    "request_id": "reqK",
+    "slot": "h1",
+    "request_type": "ReunionAccesible",
+    "expected_spaces": {"AulaA"},
+    },
 ]
-
 
 def run_cases(module_name: str) -> List[Dict]:
     kb_module = importlib.import_module(module_name)
