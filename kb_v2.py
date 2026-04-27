@@ -149,6 +149,7 @@ EXTRA_RULES = [
         ("Accesible", "?s"),
     ),
     consequent=("Recomendable", "?s", "?g", "?t"),
+)
 ]
 
 
