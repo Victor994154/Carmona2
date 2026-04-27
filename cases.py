@@ -86,6 +86,7 @@ MANDATORY_CASES = [
     },
 ]
 
+
 def run_cases(module_name: str) -> List[Dict]:
     kb_module = importlib.import_module(module_name)
     kb = kb_module.build_kb()
