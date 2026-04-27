@@ -15,16 +15,19 @@ REQUEST_TYPES = list(V1_REQUEST_TYPES) + ["ReunionAccesible"]
 # -------------------------------------------------------------------
 # TODO:
 # Agrega aquí los nuevos hechos de V2.
-#
 # Sugerencia mínima:
-# ("Accesible", "AulaA")
-# ("Accesible", "SalaReuniones")
-# ("Centrico", "AulaA")
-# ("Centrico", "SalaReuniones")
+#("Accesible", "AulaA")
+#("Accesible", "SalaReuniones")
+#("Centrico", "AulaA")
+#("Centrico", "SalaReuniones")
 # -------------------------------------------------------------------
 EXTRA_FACTS = {
     # Ejemplo:
-    # ("Accesible", "AulaA"),
+    #Propiedades extra de espacios
+    ("Accesible", "AulaA"),
+    ("Accesible", "SalaReuniones"),
+    ("Centrico", "AulaA"),
+    ("Centrico", "SalaReuniones"),
 }
 
 # -------------------------------------------------------------------
@@ -32,19 +35,72 @@ EXTRA_FACTS = {
 # Agrega aquí las nuevas reglas de V2.
 #
 # Sugerencias mínimas:
-# 1) ReunionAccesible(g) ==> ReunionEquipo(g)
+
+# 1) ReunionAccesible(g) ==> ReunionEquipo(g) ----- LISTO R9
 # 2) ReunionAccesible(g) ==> NecesitaAccesibilidad(g)
 # 3) Asignable(s,g,t) & NecesitaAccesibilidad(g) & Accesible(s) ==> Recomendable(s,g,t)
 # 4) Asignable(s,g,t) & Presentacion(g) & Centrico(s) ==> Recomendable(s,g,t)
 # -------------------------------------------------------------------
 EXTRA_RULES = [
-    # Ejemplo:
-    # Rule(
-    #     name="R9_reunion_accesible_es_reunion",
-    #     antecedents=(("ReunionAccesible", "?g"),),
-    #     consequent=("ReunionEquipo", "?g"),
-    #     description="Toda reunión accesible también es una reunión de equipo.",
-    # ),
+    Rule(
+    name="R9_reunion_accesible_es_reunion",
+    antecedents=(("ReunionAccesible", "?g"),),
+    consequent=("ReunionEquipo", "?g"),
+    description="Una reunión accesible también es una reunión de equipo.",
+    ),
+    Rule(
+        name="R10_reunion_necesita_accesibilidad",
+        antecedents=(("ReunionAccesible", "?g"),),
+        consequent=("NecesitaAccesibilidad", "?g"),
+        description="Una reunión accesible requiere accesibilidad.",
+    ),
+
+    Rule(
+        name="R11_recomendar_accesible",
+        antecedents=(
+            ("Asignable", "?s", "?g", "?t"),
+            ("NecesitaAccesibilidad", "?g"),
+            ("Accesible", "?s"),
+        ),
+        consequent=("Recomendable", "?s", "?g", "?t"),
+        description="Si necesita accesibilidad, recomendar espacios accesibles.",
+    ),
+    Rule(
+        name="R12_recomendar_centrico_presentacion",
+        antecedents=(
+            ("Asignable", "?s", "?g", "?t"),
+            ("Presentacion", "?g"),
+            ("Centrico", "?s"),
+        ),
+        consequent=("Recomendable", "?s", "?g", "?t"),
+        description="Para presentaciones, preferir espacios céntricos.",
+    ),
+    #Rule(
+    #name="R13_no_recomendar_no_accesible",
+    #antecedents=(
+        #("Asignable", "?s", "?g", "?t"),
+        #("NecesitaAccesibilidad", "?g"),
+    #),
+    #consequent=("NoIdeal", "?s", "?g", "?t"),
+    #description="Espacios no accesibles no son ideales.",
+    #),
+    Rule(
+    name="R14_priorizar_silencio",
+    antecedents=(
+        ("Asignable", "?s", "?g", "?t"),
+        ("EstudioIndividual", "?g"),
+        ("Silenciosa", "?s"),
+    ),
+    consequent=("Recomendable", "?s", "?g", "?t"),
+    ),
+    #Rule(
+    #name="R15_no_recomendar_sin_proyector",
+    #antecedents=(
+        #("Asignable", "?s", "?g", "?t"),
+        #("Presentacion", "?g"),
+    #),
+    #consequent=("MenosIdeal", "?s", "?g", "?t"),
+    #),
 ]
 
 
