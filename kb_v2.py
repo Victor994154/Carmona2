@@ -141,6 +141,14 @@ EXTRA_RULES = [
     consequent=("MenosIdeal", "?s", "?g", "?t"),
     description="Espacios colaborativos no son ideales para estudio individual.",
 ),
+    Rule(
+    name="R21_accesibilidad_exclusiva",
+    antecedents=(
+        ("Asignable", "?s", "?g", "?t"),
+        ("NecesitaAccesibilidad", "?g"),
+        ("Accesible", "?s"),
+    ),
+    consequent=("Recomendable", "?s", "?g", "?t"),
 ]
 
 
