@@ -75,15 +75,15 @@ EXTRA_RULES = [
         consequent=("Recomendable", "?s", "?g", "?t"),
         description="Para presentaciones, preferir espacios céntricos.",
     ),
-    #Rule(
-    #name="R13_no_recomendar_no_accesible",
-    #antecedents=(
-        #("Asignable", "?s", "?g", "?t"),
-        #("NecesitaAccesibilidad", "?g"),
-    #),
-    #consequent=("NoIdeal", "?s", "?g", "?t"),
-    #description="Espacios no accesibles no son ideales.",
-    #),
+    Rule(
+    name="R13_no_recomendar_no_accesible",
+    antecedents=(
+        ("Asignable", "?s", "?g", "?t"),
+        ("NecesitaAccesibilidad", "?g"),
+    ),
+    consequent=("NoIdeal", "?s", "?g", "?t"),
+    description="Espacios no accesibles no son ideales.",
+    ),
     Rule(
     name="R14_priorizar_silencio",
     antecedents=(
@@ -93,14 +93,14 @@ EXTRA_RULES = [
     ),
     consequent=("Recomendable", "?s", "?g", "?t"),
     ),
-    #Rule(
-    #name="R15_no_recomendar_sin_proyector",
-    #antecedents=(
-        #("Asignable", "?s", "?g", "?t"),
-        #("Presentacion", "?g"),
-    #),
-    #consequent=("MenosIdeal", "?s", "?g", "?t"),
-    #),
+    Rule(
+    name="R15_no_recomendar_sin_proyector",
+    antecedents=(
+        ("Asignable", "?s", "?g", "?t"),
+        ("Presentacion", "?g"),
+    ),
+    consequent=("MenosIdeal", "?s", "?g", "?t"),
+    ),
     Rule(
     name="R16_priorizar_colaborativo_reunion",
     antecedents=(
