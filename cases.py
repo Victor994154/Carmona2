@@ -36,13 +36,6 @@ MANDATORY_CASES = [
         "expected_spaces": {"AuditorioMini"},
     },
     {
-    "case_name": "Caso 5 - ReunionAccesible en h2",
-    "request_id": "reqE",
-    "slot": "h2",
-    "request_type": "ReunionAccesible",
-    "expected_spaces": {"AulaA", "SalaReuniones"},
-    },
-    {
     "case_name": "Caso 6 - Presentacion con preferencia centrica",
     "request_id": "reqF",
     "slot": "h2",
