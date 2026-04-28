@@ -87,8 +87,8 @@ with right_col:
 
         st.write(f"Solicitud: **{request_type}({request_id})** en **{slot}**")
 
-        assignable_spaces = [fact[1] for fact in result["assignable"]]
-        recommendable_spaces = [fact[1] for fact in result["recommendable"]]
+        assignable_spaces = [fact[1] for fact in result.get["assignable"]]
+        recommendable_spaces = [fact[1] for fact in result.get["recommendable"]]
         altamente_spaces = [fact[1] for fact in result.get("altamente_recomendable", [])]
         menos_spaces = [fact[1] for fact in result.get("menos_ideal", [])]
 
