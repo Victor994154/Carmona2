@@ -104,7 +104,7 @@ with right_col:
             st.write("**Espacios recomendables:** ninguno derivado todavía.")
         if altamente_spaces:
             st.write("**Espacios altamente recomendables:**", ", ".join(altamente_spaces))
-        else:
+
         if menos_spaces:
             st.write("**Espacios menos ideales:**", ", ".join(menos_spaces))
         st.markdown("#### Reservar")
