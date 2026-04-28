@@ -188,11 +188,13 @@ def run_request(
 
     assignable = filter_facts(closure, "Asignable", None, request_id, slot)
     recommendable = filter_facts(closure, "Recomendable", None, request_id, slot)
+    altamente_recomendable = filter_facts(closure, "AltamenteRecomendable", None, request_id, slot)
+    menos_ideal = filter_facts(closure, "MenosIdeal", None, request_id, slot)
 
     return {
-        "facts_with_request": facts_with_request,
-        "closure": closure,
-        "trace": trace,
         "assignable": assignable,
         "recommendable": recommendable,
+        "altamente_recomendable": altamente_recomendable,
+        "menos_ideal": menos_ideal,
+        "trace": trace,
     }
