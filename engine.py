@@ -192,9 +192,11 @@ def run_request(
     menos_ideal = filter_facts(closure, "MenosIdeal", None, request_id, slot)
 
     return {
+        "facts_with_request": facts_with_request,
+        "closure": closure,
+        "trace": trace,
         "assignable": assignable,
         "recommendable": recommendable,
         "altamente_recomendable": altamente_recomendable,
         "menos_ideal": menos_ideal,
-        "trace": trace,
     }
