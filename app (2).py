@@ -89,6 +89,8 @@ with right_col:
 
         assignable_spaces = [fact[1] for fact in result["assignable"]]
         recommendable_spaces = [fact[1] for fact in result["recommendable"]]
+        altamente_spaces = [fact[1] for fact in result.get("altamente_recomendable", [])]
+        menos_spaces = [fact[1] for fact in result.get("menos_ideal", [])]
 
         if assignable_spaces:
             st.success("La consulta ∃s Asignable(s, g, t) es verdadera.")
@@ -100,7 +102,11 @@ with right_col:
             st.write("**Espacios recomendables:**", ", ".join(recommendable_spaces))
         else:
             st.write("**Espacios recomendables:** ninguno derivado todavía.")
-
+        if altamente_spaces:
+            st.write("**Espacios altamente recomendables:**", ", ".join(altamente_spaces))
+        
+        if menos_spaces:
+            st.write("⚠️ **Espacios menos ideales:**", ", ".join(menos_spaces))
         st.markdown("#### Reservar")
         if assignable_spaces:
             reserve_cols = st.columns(len(assignable_spaces))
