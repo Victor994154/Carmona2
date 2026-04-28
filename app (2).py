@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib
+import uuid
 
 import streamlit as st
 
@@ -29,6 +30,13 @@ def ensure_session_kb(module_name: str):
     return session_key
 
 
+# -------------------------------
+# Inicializar contador de requests
+# -------------------------------
+if "req_counter" not in st.session_state:
+    st.session_state["req_counter"] = 1
+
+
 st.sidebar.header("Configuración")
 selected_module_name = st.sidebar.radio(
     "Versión de KB",
@@ -53,6 +61,9 @@ with title_col:
 
 left_col, right_col = st.columns([1.1, 1.2])
 
+# ===============================
+# PANEL IZQUIERDO
+# ===============================
 with left_col:
     st.markdown("### Disponibilidad actual")
     matrix_df = availability_dataframe(current_facts, kb["spaces"], kb["slots"])
@@ -60,13 +71,43 @@ with left_col:
 
     st.markdown("### Nueva solicitud")
     with st.form("request_form"):
-        request_id = st.text_input("ID de solicitud", value="req1")
+
+        col1, col2 = st.columns([2, 1])
+
+        with col1:
+            request_id = st.text_input("ID de solicitud (opcional)", value="")
+
+        with col2:
+            auto_id = f"req{st.session_state['req_counter']}"
+            st.write(f"Auto ID: {auto_id}")
+
         slot = st.selectbox("Franja horaria", kb["slots"])
         request_type = st.selectbox("Tipo de solicitud", kb["request_types"])
+
         submit = st.form_submit_button("Correr inferencia")
 
     if submit:
+        # -------------------------------
+        # Generar ID automático si vacío
+        # -------------------------------
+        if not request_id.strip():
+            request_id = auto_id
+            st.session_state["req_counter"] += 1
+
+        # -------------------------------
+        # Validar IDs duplicados
+        # -------------------------------
+        existing_ids = {fact[1] for fact in current_facts if len(fact) > 1}
+
+        if request_id in existing_ids:
+            st.error(f"El ID '{request_id}' ya existe. Usa otro.")
+            st.stop()
+
+        # -------------------------------
+        # Ejecutar inferencia
+        # -------------------------------
         result = run_request(current_facts, rules, request_id, slot, request_type)
+
         st.session_state["last_result"] = {
             "module_name": selected_module_name,
             "request_id": request_id,
@@ -75,6 +116,10 @@ with left_col:
             "result": result,
         }
 
+
+# ===============================
+# PANEL DERECHO
+# ===============================
 with right_col:
     st.markdown("### Resultado de la inferencia")
     last = st.session_state.get("last_result")
@@ -101,34 +146,52 @@ with right_col:
         else:
             st.write("**Espacios recomendables:** ninguno derivado todavía.")
 
+        # -------------------------------
+        # Reservar
+        # -------------------------------
         st.markdown("#### Reservar")
         if assignable_spaces:
             reserve_cols = st.columns(len(assignable_spaces))
             for col, space in zip(reserve_cols, assignable_spaces):
                 with col:
-                    if st.button(f"Reservar {space}", key=f"reserve::{selected_module_name}::{space}::{request_id}::{slot}"):
+                    if st.button(
+                        f"Reservar {space}",
+                        key=f"reserve::{selected_module_name}::{space}::{request_id}::{slot}"
+                    ):
                         updated = reserve_space(current_facts, space, request_id, slot)
                         st.session_state[session_key] = updated
                         st.session_state.pop("last_result", None)
                         st.rerun()
 
+        # -------------------------------
+        # Traza
+        # -------------------------------
         st.markdown("#### Traza")
         if result["trace"]:
             st.dataframe(result["trace"], hide_index=True, use_container_width=True)
         else:
             st.info("No se derivaron hechos nuevos.")
 
+        # -------------------------------
+        # Cierre
+        # -------------------------------
         with st.expander("Ver todos los hechos de cierre"):
             for fact in sorted(result["closure"]):
                 st.write("-", fact_to_string(fact))
+
     else:
         st.info("Envía una solicitud para ver asignaciones, recomendaciones y traza.")
 
+
+# ===============================
+# COMPARACIÓN KBs
+# ===============================
 st.markdown("---")
 st.markdown("### Comparación rápida KB V1 vs KB V2")
 
 results_v1 = run_cases("kb_v1")
 results_v2 = run_cases("kb_v2")
+
 comparison_df = comparison_dataframe(results_v1, results_v2)
 st.bar_chart(comparison_df)
 
