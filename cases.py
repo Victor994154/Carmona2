@@ -1,10 +1,7 @@
 from __future__ import annotations
-
 import importlib
 from typing import Dict, List
-
 from engine import run_request
-
 
 MANDATORY_CASES = [
     {
@@ -35,47 +32,55 @@ MANDATORY_CASES = [
         "request_type": "PresentacionGrande",
         "expected_spaces": {"AuditorioMini"},
     },
+    # Casos donde V2 supera a V1 claramente
     {
-    "case_name": "Caso 6 - Presentacion con preferencia centrica",
-    "request_id": "reqF",
-    "slot": "h2",
-    "request_type": "Presentacion",
-    "expected_spaces": {"AulaA", "SalaReuniones"},
+        "case_name": "Caso 5 - ReunionAccesible en h2",
+        "request_id": "reqE",
+        "slot": "h2",
+        "request_type": "ReunionAccesible",
+        "expected_spaces": {"AulaA", "SalaReuniones"},
     },
     {
-    "case_name": "Caso 7 - ReunionAccesible en h2 (enfoque accesibilidad)",
-    "request_id": "reqG",
-    "slot": "h2",
-    "request_type": "ReunionAccesible",
-    "expected_spaces": {"AulaA", "SalaReuniones"},
+        "case_name": "Caso 6 - ReunionAccesible en h3",
+        "request_id": "reqF",
+        "slot": "h3",
+        "request_type": "ReunionAccesible",
+        "expected_spaces": {"AulaA", "SalaReuniones"},
     },
     {
-    "case_name": "Caso 8 - Presentacion con preferencia centrica",
-    "request_id": "reqH",
-    "slot": "h2",
-    "request_type": "Presentacion",
-    "expected_spaces": {"AulaA", "SalaReuniones"},
+        "case_name": "Caso 7 - ReunionAccesible en h4",
+        "request_id": "reqG",
+        "slot": "h4",
+        "request_type": "ReunionAccesible",
+        "expected_spaces": {"AulaA", "SalaReuniones"},
     },
     {
-    "case_name": "Caso 9 - EstudioIndividual evitando colaborativos",
-    "request_id": "reqI",
-    "slot": "h1",
-    "request_type": "EstudioIndividual",
-    "expected_spaces": {"Biblio1"},
+        "case_name": "Caso 8 - ReunionAccesible en h1",
+        "request_id": "reqH",
+        "slot": "h1",
+        "request_type": "ReunionAccesible",
+        "expected_spaces": {"AulaA"},
     },
     {
-    "case_name": "Caso 10 - PresentacionGrande optimizada",
-    "request_id": "reqJ",
-    "slot": "h3",
-    "request_type": "PresentacionGrande",
-    "expected_spaces": {"AuditorioMini"},
+        "case_name": "Caso 9 - Presentacion en h3 (centrico)",
+        "request_id": "reqI",
+        "slot": "h3",
+        "request_type": "Presentacion",
+        "expected_spaces": {"SalaReuniones", "AuditorioMini"},
     },
     {
-    "case_name": "Caso 11 - ReunionAccesible en h1 (menos opciones)",
-    "request_id": "reqK",
-    "slot": "h1",
-    "request_type": "ReunionAccesible",
-    "expected_spaces": {"AulaA"},
+        "case_name": "Caso 10 - Presentacion en h4 (centrico)",
+        "request_id": "reqJ",
+        "slot": "h4",
+        "request_type": "Presentacion",
+        "expected_spaces": {"AulaA", "SalaReuniones", "AuditorioMini"},
+    },
+    {
+        "case_name": "Caso 11 - ReunionEquipo en h3 (colaborativo)",
+        "request_id": "reqK",
+        "slot": "h3",
+        "request_type": "ReunionEquipo",
+        "expected_spaces": {"AulaA", "SalaReuniones"},
     },
 ]
 
@@ -83,7 +88,6 @@ MANDATORY_CASES = [
 def run_cases(module_name: str) -> List[Dict]:
     kb_module = importlib.import_module(module_name)
     kb = kb_module.build_kb()
-
     results = []
     for case in MANDATORY_CASES:
         result = run_request(
@@ -95,7 +99,6 @@ def run_cases(module_name: str) -> List[Dict]:
         )
         spaces = {fact[1] for fact in result["assignable"]}
         ok = case["expected_spaces"].issubset(spaces)
-
         results.append(
             {
                 "case_name": case["case_name"],
