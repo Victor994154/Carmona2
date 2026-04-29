@@ -1,4 +1,4 @@
-# 🏫 Mini Agente Lógico para la Asignación de Espacios
+#  Mini Agente Lógico para la Asignación de Espacios
 
 **Integrantes:**
 - Juan Sebastián Chitiva Guerrero
@@ -9,7 +9,7 @@
 
 ---
 
-## 📌 Descripción
+##  Descripción
 
 Webapp construida con **Streamlit** que implementa un mini agente lógico basado en **lógica de primer orden (FOL)**. El sistema razona sobre disponibilidad de espacios físicos (aulas, biblioteca, sala de reuniones, auditorio) para asignar y recomendar espacios según el tipo de solicitud, mostrando la traza de inferencia completa.
 
@@ -17,7 +17,7 @@ El agente no usa búsqueda heurística ni ML — toda decisión se deriva median
 
 ---
 
-## 🧩 Diseño de KB V2
+##  Diseño de KB V2
 
 ### Reglas nuevas
 
@@ -51,7 +51,7 @@ El agente no usa búsqueda heurística ni ML — toda decisión se deriva median
 
 ---
 
-## ⚙️ ¿Cómo funciona?
+##  ¿Cómo funciona?
 
 ### Representación del conocimiento
 
@@ -94,7 +94,7 @@ Usuario reserva → KB se actualiza (Libre → Ocupada)
 
 ---
 
-## 🗃️ KB V1 vs KB V2
+##  KB V1 vs KB V2
 
 | Dimensión | KB V1 | KB V2 |
 |-----------|-------|-------|
@@ -110,7 +110,7 @@ Usuario reserva → KB se actualiza (Libre → Ocupada)
 
 ---
 
-## 🏗️ Espacios disponibles
+##  Espacios disponibles
 
 | Espacio | Silenciosa | Colaborativo | Proyector | Cap. Alta | Accesible* | Céntrico* |
 |---------|:----------:|:------------:|:---------:|:---------:|:----------:|:---------:|
@@ -124,7 +124,7 @@ Usuario reserva → KB se actualiza (Libre → Ocupada)
 
 ---
 
-## 📊 Comparación de resultados
+##  Comparación de resultados
 
 | Casos | KB V1 asignables | KB V2 asignables |
 |-------|:----------------:|:----------------:|
@@ -136,7 +136,7 @@ Los casos 5–8 son los que hacen visible la diferencia en la gráfica de la app
 
 ---
 
-## 🗂️ Estructura del proyecto
+##  Estructura del proyecto
 
 ```
 .
@@ -152,7 +152,7 @@ Los casos 5–8 son los que hacen visible la diferencia en la gráfica de la app
 
 ---
 
-## 🚀 Instalación y ejecución
+## Instalación y ejecución
 
 ```bash
 # 1. Clonar el repositorio
@@ -170,7 +170,7 @@ streamlit run app.py
 
 ---
 
-## 📄 Subcompetencias demostradas
+##  Subcompetencias demostradas
 
 - **SMA0402A** — Reconocimiento de patrones, lenguaje natural e IA
 - **SEG0303A** — Efectividad en la negociación
