@@ -5,6 +5,23 @@ Integrantes:
 - Paulina Godínez Mendoza
 - Víctor Yael Méndez Alcántara
 
+
+## Estructura del proyecto
+
+
+├── app.py          # Interfaz Streamlit principal
+├── engine.py       # Motor de inferencia (forward chaining)
+├── kb_v1.py        # Base de conocimiento versión 1 (base)
+├── kb_v2.py        # Base de conocimiento versión 2 (extendida)
+├── viz.py          # Visualizaciones y dataframes
+├── cases.py        # Casos de prueba automáticos
+├── README.md
+
+
+## Subcompetencias demostradas
+
+- SMA0402A — Reconocimiento de patrones, lenguaje natural e IA
+- SEG0303A — Efectividad en la negociación
 ## DISEÑO DE KB_V2
 ### Reglas nuevas
 
