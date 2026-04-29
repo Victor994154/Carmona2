@@ -5,7 +5,7 @@
 - Paulina Godínez Mendoza
 - Víctor Yael Méndez Alcántara · A01368475
 
-> Proyecto para **Inteligencia Artificial (SMA0402A)** — Tecnológico de Monterrey · Semestre Ene–Jun 2026
+
 
 ---
 
