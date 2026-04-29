@@ -66,6 +66,19 @@ Se derivan:
         ↓
 Usuario reserva → KB se actualiza (Libre → Ocupada)
 
+
+
+## 🗃️ KB V1 vs KB V2
+
+| Dimensión | KB V1 | KB V2 |
+|-----------|-------|-------|
+| Hechos base | 32 | 36 (+4 propiedades) |
+| Reglas | 8 (R1–R8) | 16 (R1–R21) |
+| Tipos de solicitud | 4 | 5 (+`ReunionAccesible`) |
+| Predicados derivados | `Asignable`, `Recomendable` | + `NecesitaAccesibilidad`, `AltamenteRecomendable`, `MenosIdeal` |
+| Mostrado en la app | Asignables + Recomendables | + Altamente recomendables + Menos ideales |
+| Caso `ReunionAccesible` | ❌ No resuelto | ✅ Resuelto en 3 rondas |
+
 ## CASOS DE PRUEBA
 
 ## COMPARACIÓN DE RESULTADOS
