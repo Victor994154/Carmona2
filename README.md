@@ -103,7 +103,7 @@ Usuario reserva → KB se actualiza (Libre → Ocupada)
 | Tipos de solicitud | 4 | 5 (`+ReunionAccesible`) |
 | Predicados derivados | `Asignable`, `Recomendable` | + `NecesitaAccesibilidad`, `AltamenteRecomendable`, `MenosIdeal` |
 | Mostrado en la app | Asignables + Recomendables | + Altamente recomendables + Menos ideales |
-| Caso `ReunionAccesible` | ❌ No resuelto | ✅ Resuelto en 3 rondas |
+| Caso `ReunionAccesible` |  No resuelto |  Resuelto en 3 rondas |
 
 **KB V2** habilita inferencia en cadena:
 `ReunionAccesible → ReunionEquipo → RequiereColaboracion → Asignable → Recomendable → AltamenteRecomendable`
