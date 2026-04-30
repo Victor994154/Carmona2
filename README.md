@@ -2,7 +2,7 @@
 
 **Integrantes:**
 - Juan Sebastián Chitiva Guerrero - A01276239
-- Paulina Godínez Mendoza
+- Paulina Godínez Mendoza - A01708423
 - Víctor Yael Méndez Alcántara · A01368475
 
 
