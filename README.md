@@ -1,7 +1,7 @@
 #  Mini Agente Lógico para la Asignación de Espacios
 
 **Integrantes:**
-- Juan Sebastián Chitiva Guerrero
+- Juan Sebastián Chitiva Guerrero - A01276239
 - Paulina Godínez Mendoza
 - Víctor Yael Méndez Alcántara · A01368475
 
